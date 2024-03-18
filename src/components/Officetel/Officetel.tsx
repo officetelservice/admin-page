@@ -23,7 +23,9 @@ const OfficetelComponent: React.FC<OfficetelComponentProps> = ({
 		navigation(`/officetel/${officetel.id}`);
 	};
 
-	const copyTextToClipboard = (link: string) => {
+	const copyTextToClipboard = (e, link: string) => {
+		e.stopPropagation();
+
 		navigator.clipboard
 			.writeText(link)
 			.then(() => alert('링크가 복사되었습니다.'))
@@ -41,7 +43,7 @@ const OfficetelComponent: React.FC<OfficetelComponentProps> = ({
 				</DayData>
 			</DayContainer>
 
-			<LinkContainer onClick={() => copyTextToClipboard(officetel.link)}>
+			<LinkContainer onClick={(e) => copyTextToClipboard(e, officetel.link)}>
 				<CopyButton size={20} />
 				<LinkText>{officetel.link}</LinkText>
 			</LinkContainer>

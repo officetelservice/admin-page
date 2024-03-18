@@ -69,6 +69,7 @@ const UploadPage = () => {
 	};
 
 	const toNext = () => {
+		alert('오피스텔을 생성하겠습니까?');
 		navigation('/officetels');
 	};
 
@@ -147,9 +148,9 @@ const UploadPage = () => {
 						<DatePickerComponent date={endDate} setDate={setEndDate} />
 					</DatePickerContainer>
 				</InputContainer>
-			</Form>
 
-			<ButtonComponent title={'완료'} color={'#ffa500'} onClick={toNext} />
+				<ButtonComponent title={'완료'} color={'#ffa500'} onClick={toNext} />
+			</Form>
 		</Container>
 	);
 };

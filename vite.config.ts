@@ -25,6 +25,10 @@ export default defineConfig({
 				find: '@utils',
 				replacement: path.resolve(__dirname, 'src/utils'),
 			},
+			{
+				find: '@layout',
+				replacement: path.resolve(__dirname, 'src/layout'),
+			},
 		],
 	},
 });

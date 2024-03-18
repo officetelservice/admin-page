@@ -8,7 +8,7 @@ const ButtonContainer = styled.div`
 
 	border-radius: 10px;
 	width: 100%;
-	height: 40px;
+	height: 60px;
 	max-width: 500px;
 	margin: 5px auto;
 

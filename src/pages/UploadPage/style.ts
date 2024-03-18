@@ -10,14 +10,12 @@ export const Container = styled.div`
 	padding: 20px;
 `;
 
-export const Form = styled.form`
+export const Form = styled.div`
 	width: 100%;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-
-	overflow-y: scroll;
 `;
 
 export const InputContainer = styled.div`
@@ -27,7 +25,7 @@ export const InputContainer = styled.div`
 `;
 
 export const InputText = styled.div`
-	font-weight: 500;
+	font-weight: 600;
 	margin-bottom: 5px;
 `;
 
@@ -42,6 +40,8 @@ export const InputBox = styled.input`
 	border-radius: 12px;
 	background-color: white;
 	color: black;
+
+	outline: none;
 `;
 
 export const TimeIntervalContainer = styled.div`
@@ -51,6 +51,7 @@ export const TimeIntervalContainer = styled.div`
 
 export const TimeIntervalSelect = styled.select`
 	cursor: pointer;
+	outline: none;
 
 	background-color: white;
 	color: black;
@@ -74,6 +75,7 @@ export const SelectOptionText = styled.option`
 
 export const DatePickerContainer = styled.div`
 	display: flex;
+	justify-content: center;
 	align-items: center;
 `;
 

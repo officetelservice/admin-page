@@ -1,7 +1,7 @@
-import ButtonComponent from '@/components/Button/Button';
+import { useEffect, useState } from 'react';
+import DatePickerComponent from '@/components/DatePicker/DatePicker';
 import ScheduleComponent from '@/components/Schedule/Schedule';
-import { Container, ScheduleContainer, ReserveTime } from './style';
-import { useNavigate } from 'react-router-dom';
+import { Container, ScheduleContainer } from './style';
 
 const schedules = [
 	{
@@ -84,30 +84,22 @@ const schedules = [
 	},
 ];
 
-const LandingPage = () => {
-	const navigation = useNavigate();
+const SchedulePage = () => {
+	const [date, setDate] = useState<Date | null>(new Date());
 
-	const toNext = () => {
-		navigation('/officetels');
-	};
+	useEffect(() => {}, [date]);
 
 	return (
 		<Container>
-			<ReserveTime>날짜 넣기</ReserveTime>
+			<DatePickerComponent date={date} setDate={setDate} />
 
 			<ScheduleContainer>
 				{schedules.map((schedule) => (
 					<ScheduleComponent schedule={schedule} />
 				))}
 			</ScheduleContainer>
-
-			<ButtonComponent
-				title={'오피스텔 관리'}
-				color={'#ffa500'}
-				onClick={toNext}
-			/>
 		</Container>
 	);
 };
 
-export default LandingPage;
+export default SchedulePage;

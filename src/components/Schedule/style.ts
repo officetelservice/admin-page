@@ -29,12 +29,12 @@ export const OfficetelData = styled.div`
 `;
 
 export const OfficetelName = styled.div`
-	font-weight: bold;
+	font-weight: 500;
 	margin-right: 5px;
 `;
 
 export const OfficetelFloor = styled.div`
-	font-weight: bold;
+	font-weight: 500;
 `;
 
 export const CompleteButton = styled.div`

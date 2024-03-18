@@ -7,6 +7,7 @@ export const Container = styled.div`
 	flex-direction: column;
 	align-items: center;
 	padding: 20px;
+	overflow-y: scroll;
 `;
 
 export const Title = styled.h2``;
@@ -17,6 +18,6 @@ export const OfficetelContainer = styled.div`
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
-	overflow-y: scroll;
-	margin: 40px 0;
+
+	margin: 20px 0;
 `;

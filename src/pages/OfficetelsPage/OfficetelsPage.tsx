@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import OfficetelComponent from '@/components/Officetel/Officetel';
 import ButtonComponent from '@/components/Button/Button';
-import { Container, Title, OfficetelContainer } from './style';
+import { Container, OfficetelContainer } from './style';
 
 const officetels = [
 	{
@@ -37,7 +37,7 @@ const OfficetelsPage = () => {
 
 	return (
 		<Container>
-			<Title>오피스텔 관리</Title>
+			{/* <Title>오피스텔 관리</Title> */}
 
 			<OfficetelContainer>
 				{officetels.map((officetel) => (

@@ -6,6 +6,7 @@ export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	overflow-y: scroll;
 	padding: 20px;
 `;
 
@@ -15,8 +16,8 @@ export const ScheduleContainer = styled.div`
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
-	overflow-y: scroll;
-	margin: 40px 0;
+
+	margin: 20px 0;
 `;
 
 export const Schedule = styled.div`
