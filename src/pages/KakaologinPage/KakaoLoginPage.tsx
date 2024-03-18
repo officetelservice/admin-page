@@ -35,6 +35,8 @@ const KakaoLoginPage: React.FC = () => {
 				console.log(response.data);
 
 				setKakaoToken(response.data.access_token);
+
+				navigate('/');
 			} catch (error) {
 				console.log(error);
 			}
