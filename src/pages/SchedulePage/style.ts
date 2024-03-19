@@ -20,46 +20,11 @@ export const ScheduleContainer = styled.div`
 	margin: 20px 0;
 `;
 
-export const Schedule = styled.div`
+export const AlertContainer = styled.div`
+	flex: 1;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
-	width: 100%;
-	max-width: 500px;
-	height: 80px;
-
-	margin-bottom: 10px;
-	padding: 5px 10px;
-
-	border: 2px solid #ffa500;
-	border-radius: 12px;
 `;
 
-export const ReserveData = styled.div`
-	display: flex;
-	flex-direction: column;
-`;
-
-export const ReserveTime = styled.div`
-	font-weight: bold;
-`;
-
-export const OfficetelData = styled.div`
-	display: flex;
-`;
-
-export const OfficetelName = styled.div`
-	font-weight: bold;
-	margin-right: 5px;
-`;
-
-export const OfficetelFloor = styled.div`
-	font-weight: bold;
-`;
-
-export const CompleteButton = styled.div`
-	cursor: pointer;
-	padding: 5px 10px;
-	border: 2px solid #ffa500;
-	border-radius: 12px;
-`;
+export const AlertText = styled.h2``;

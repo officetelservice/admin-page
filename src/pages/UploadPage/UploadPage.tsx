@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
 	Container,
@@ -15,6 +15,8 @@ import {
 } from './style';
 import DatePickerComponent from '@/components/DatePicker/DatePicker';
 import ButtonComponent from '@/components/Button/Button';
+import { PostAxiosInstance } from '@/api/axios.method';
+import moment from 'moment';
 
 const timeIntervals = [10, 20, 30, 40, 50, 60];
 
@@ -48,11 +50,78 @@ const workTimes = [
 const UploadPage = () => {
 	const navigation = useNavigate();
 
+	const [officetelName, setOfficetelName] = useState<string>('');
+	const [floorNum, setFloorNum] = useState<string>('');
+	const [roomNum, setRoomNum] = useState<string>('');
 	const [timeInterval, setTimeInterval] = useState<string>('');
 	const [startTime, setStartTime] = useState<string>('');
 	const [endTime, setEndTime] = useState<string>('');
 	const [startDate, setStartDate] = useState<Date | null>(new Date());
 	const [endDate, setEndDate] = useState<Date | null>(new Date());
+
+	const createOfficetel = useCallback(async () => {
+		if (
+			!officetelName &&
+			!floorNum &&
+			!roomNum &&
+			!timeInterval &&
+			!startTime &&
+			!endTime &&
+			!startDate &&
+			!endDate
+		) {
+			return alert('항목을 모두 입력해주세요!');
+		}
+
+		const formattedStartDay = moment(startDate).format('YYYY/MM/DD');
+		const formattedEndDay = moment(endDate).format('YYYY/MM/DD');
+
+		// 시간 비교
+		if (formattedStartDay > formattedEndDay) {
+			return alert('시작기간은 마감기간보다 빨라야 합니다!');
+		}
+
+		const data = {
+			name: officetelName,
+			floorNum: parseInt(floorNum),
+			roomNum: parseInt(roomNum),
+			timeInterval: parseInt(timeInterval),
+			startTime: startTime,
+			endTime: endTime,
+			startDay: formattedStartDay,
+			endDay: formattedEndDay,
+		};
+
+		await PostAxiosInstance('/officetels', data);
+
+		alert('오피스텔을 생성하겠습니까?');
+
+		navigation('/officetels');
+	}, [
+		officetelName,
+		floorNum,
+		roomNum,
+		timeInterval,
+		startTime,
+		endTime,
+		startDate,
+		endDate,
+		navigation,
+	]);
+
+	const handleOfficetelNameChange = (
+		e: React.ChangeEvent<HTMLInputElement>
+	) => {
+		setOfficetelName(e.target.value);
+	};
+
+	const handleFloorNumChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setFloorNum(e.target.value);
+	};
+
+	const handleRoomNumChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setRoomNum(e.target.value);
+	};
 
 	const handleTimeIntervalChange = (
 		e: React.ChangeEvent<HTMLSelectElement>
@@ -68,27 +137,25 @@ const UploadPage = () => {
 		setEndTime(e.target.value);
 	};
 
-	const toNext = () => {
-		alert('오피스텔을 생성하겠습니까?');
-		navigation('/officetels');
-	};
-
 	return (
 		<Container>
 			<Form>
 				<InputContainer>
 					<InputText>오피스텔 이름</InputText>
-					<InputBox />
+					<InputBox
+						value={officetelName}
+						onChange={handleOfficetelNameChange}
+					/>
 				</InputContainer>
 
 				<InputContainer>
 					<InputText>층수</InputText>
-					<InputBox />
+					<InputBox value={floorNum} onChange={handleFloorNumChange} />
 				</InputContainer>
 
 				<InputContainer>
 					<InputText>층당 호수</InputText>
-					<InputBox />
+					<InputBox value={roomNum} onChange={handleRoomNumChange} />
 				</InputContainer>
 
 				<InputContainer>
@@ -149,7 +216,11 @@ const UploadPage = () => {
 					</DatePickerContainer>
 				</InputContainer>
 
-				<ButtonComponent title={'완료'} color={'#ffa500'} onClick={toNext} />
+				<ButtonComponent
+					title={'완료'}
+					color={'#ffa500'}
+					onClick={createOfficetel}
+				/>
 			</Form>
 		</Container>
 	);

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
+import { sliceLongStr } from '@/utils/str';
 import {
-	Officetel,
+	OfficetelContainer,
 	OfficetelName,
 	DayContainer,
 	DayText,
@@ -9,9 +10,10 @@ import {
 	LinkText,
 	CopyButton,
 } from './style';
+import { Officetel } from '@/types/common.types';
 
 interface OfficetelComponentProps {
-	officetel: any;
+	officetel: Officetel;
 }
 
 const OfficetelComponent: React.FC<OfficetelComponentProps> = ({
@@ -33,7 +35,7 @@ const OfficetelComponent: React.FC<OfficetelComponentProps> = ({
 	};
 
 	return (
-		<Officetel onClick={toOffictelDetail}>
+		<OfficetelContainer onClick={toOffictelDetail}>
 			<OfficetelName>{officetel.name}</OfficetelName>
 
 			<DayContainer>
@@ -45,9 +47,9 @@ const OfficetelComponent: React.FC<OfficetelComponentProps> = ({
 
 			<LinkContainer onClick={(e) => copyTextToClipboard(e, officetel.link)}>
 				<CopyButton size={20} />
-				<LinkText>{officetel.link}</LinkText>
+				<LinkText>{sliceLongStr(officetel.link)}</LinkText>
 			</LinkContainer>
-		</Officetel>
+		</OfficetelContainer>
 	);
 };
 

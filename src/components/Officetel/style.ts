@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { IoCopyOutline } from 'react-icons/io5';
 
-export const Officetel = styled.div`
+export const OfficetelContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

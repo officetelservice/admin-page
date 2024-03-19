@@ -1,5 +1,6 @@
+import { Schedule } from '@/types/common.types';
 import {
-	Schedule,
+	ScheduleContainer,
 	ReserveData,
 	OfficetelData,
 	OfficetelName,
@@ -9,23 +10,23 @@ import {
 } from './style';
 
 interface ScheduleComponentProps {
-	schedule: any;
+	schedule: Schedule;
 }
 
 const ScheduleComponent: React.FC<ScheduleComponentProps> = ({ schedule }) => {
 	return (
-		<Schedule>
+		<ScheduleContainer>
 			<ReserveData>
-				<ReserveTime>{schedule.time}</ReserveTime>
+				<ReserveTime>{schedule.reserve.reservationTime}</ReserveTime>
 
 				<OfficetelData>
-					<OfficetelName>{schedule.officetel} -</OfficetelName>
-					<OfficetelFloor>{schedule.floor}호</OfficetelFloor>
+					<OfficetelName>{schedule.officetel.name} -</OfficetelName>
+					<OfficetelFloor>{schedule.reserve.floor}호</OfficetelFloor>
 				</OfficetelData>
 			</ReserveData>
 
 			<CompleteButton>완료</CompleteButton>
-		</Schedule>
+		</ScheduleContainer>
 	);
 };
 

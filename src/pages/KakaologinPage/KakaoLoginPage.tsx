@@ -51,8 +51,6 @@ const KakaoLoginPage: React.FC = () => {
 						}
 					);
 
-					console.log(response.data);
-
 					const { accessToken, refreshToken } = response.data.data;
 
 					localStorage.setItem('accessToken', accessToken);

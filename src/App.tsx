@@ -11,9 +11,11 @@ import Header from '@/layout/Header/Header';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function App() {
+	const isLoggedIn = localStorage.getItem('accessToken');
+
 	return (
 		<BrowserRouter>
-			<Header />
+			{isLoggedIn && <Header />}
 			<Routes>
 				<Route path="/login" element={<LoginPage />}></Route>
 				<Route path="/kakaoLogin" element={<KakaoLoginPage />}></Route>

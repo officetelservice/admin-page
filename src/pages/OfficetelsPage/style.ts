@@ -21,3 +21,12 @@ export const OfficetelContainer = styled.div`
 
 	margin: 20px 0;
 `;
+
+export const AlertContainer = styled.div`
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+export const AlertText = styled.h2``;

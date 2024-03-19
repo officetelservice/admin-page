@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Schedule = styled.div`
+export const ScheduleContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

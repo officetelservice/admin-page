@@ -1,103 +1,53 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import DatePickerComponent from '@/components/DatePicker/DatePicker';
 import ScheduleComponent from '@/components/Schedule/Schedule';
-import { Container, ScheduleContainer } from './style';
-
-const schedules = [
-	{
-		time: '15:30',
-		officetel: 'A오피스텔',
-		floor: 101,
-		complete: true,
-	},
-	{
-		time: '16:30',
-		officetel: 'B오피스텔',
-		floor: 102,
-		complete: false,
-	},
-	{
-		time: '16:30',
-		officetel: 'B오피스텔',
-		floor: 102,
-		complete: false,
-	},
-	{
-		time: '16:30',
-		officetel: 'B오피스텔',
-		floor: 102,
-		complete: false,
-	},
-	{
-		time: '16:30',
-		officetel: 'B오피스텔',
-		floor: 102,
-		complete: false,
-	},
-	{
-		time: '16:30',
-		officetel: 'B오피스텔',
-		floor: 102,
-		complete: false,
-	},
-	{
-		time: '16:30',
-		officetel: 'B오피스텔',
-		floor: 102,
-		complete: false,
-	},
-	{
-		time: '16:30',
-		officetel: 'B오피스텔',
-		floor: 102,
-		complete: false,
-	},
-	{
-		time: '16:30',
-		officetel: 'B오피스텔',
-		floor: 102,
-		complete: false,
-	},
-	{
-		time: '16:30',
-		officetel: 'B오피스텔',
-		floor: 102,
-		complete: false,
-	},
-	{
-		time: '16:30',
-		officetel: 'B오피스텔',
-		floor: 102,
-		complete: false,
-	},
-	{
-		time: '16:30',
-		officetel: 'B오피스텔',
-		floor: 102,
-		complete: false,
-	},
-	{
-		time: '16:30',
-		officetel: 'B오피스텔',
-		floor: 102,
-		complete: false,
-	},
-];
+import {
+	Container,
+	ScheduleContainer,
+	AlertContainer,
+	AlertText,
+} from './style';
+import { GetAxiosInstance } from '@/api/axios.method';
+import { GetSchedulesResponse } from '@/types/request.types';
+import { Schedule } from '@/types/common.types';
+import moment from 'moment';
 
 const SchedulePage = () => {
 	const [date, setDate] = useState<Date | null>(new Date());
+	const [schedules, setSchedules] = useState<Schedule[]>([]);
+	const [loading, setLoading] = useState<boolean>(false);
 
-	useEffect(() => {}, [date]);
+	const getReserves = useCallback(async () => {
+		const formmatedDate = moment(date).format('YYYY/MM/DD');
+
+		const response = await GetAxiosInstance<GetSchedulesResponse>(
+			`/users/me/reserves?date=${formmatedDate}`
+		);
+
+		setSchedules(response.data.data);
+	}, [date]);
+
+	useEffect(() => {
+		setLoading(true);
+		getReserves();
+		setLoading(false);
+	}, [date]);
 
 	return (
 		<Container>
 			<DatePickerComponent date={date} setDate={setDate} />
 
-			<ScheduleContainer>
-				{schedules.map((schedule) => (
-					<ScheduleComponent schedule={schedule} />
-				))}
-			</ScheduleContainer>
+			{schedules.length === 0 ? (
+				<AlertContainer>
+					<AlertText>일정이 없습니다</AlertText>
+				</AlertContainer>
+			) : (
+				<ScheduleContainer>
+					{schedules.map((schedule) => (
+						<ScheduleComponent schedule={schedule} />
+					))}
+				</ScheduleContainer>
+			)}
 		</Container>
 	);
 };
