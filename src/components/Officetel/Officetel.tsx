@@ -23,7 +23,7 @@ const OfficetelComponent: React.FC<OfficetelComponentProps> = ({
 		navigation(`/officetel/${officetel.id}`);
 	};
 
-	const copyTextToClipboard = (e, link: string) => {
+	const copyTextToClipboard = (e: any, link: string) => {
 		e.stopPropagation();
 
 		navigator.clipboard
