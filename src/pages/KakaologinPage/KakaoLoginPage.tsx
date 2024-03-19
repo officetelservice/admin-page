@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import LoadingModalComponent from '@/components/Loading/Loading';
 import { KakaoLoginType } from '@/types/response.types';
+import { PostAxiosInstance } from '@/api/axios.method';
 
 const KakaoLoginPage: React.FC = () => {
 	const [kakaoToken, setKakaoToken] = useState<string>('');
@@ -33,37 +34,37 @@ const KakaoLoginPage: React.FC = () => {
 				);
 
 				setKakaoToken(response.data.access_token);
-
-				navigate('/');
 			} catch (error) {
 				console.log(error);
 			}
 		})();
 	}, []);
 
-	// useEffect(() => {
-	// 	(async () => {
-	// 		if (kakaoToken) {
-	// 			try {
-	// 				const response = await PostAxiosInstance<KakaoLoginType>(
-	// 					'/v1/auth/kakao/login',
-	// 					{
-	// 						token: kakaoToken,
-	// 					}
-	// 				);
+	useEffect(() => {
+		(async () => {
+			if (kakaoToken) {
+				try {
+					const response = await PostAxiosInstance<KakaoLoginType>(
+						'/auth/kakao/login',
+						{
+							kakao_access_token: kakaoToken,
+						}
+					);
 
-	// 				const { accessToken, refreshToken } = response.data.result;
+					console.log(response.data);
 
-	// 				localStorage.setItem('accessToken', accessToken);
-	// 				localStorage.setItem('refreshToken', refreshToken);
+					const { accessToken, refreshToken } = response.data.data;
 
-	// 				navigate('/mainPage');
-	// 			} catch (error) {
-	// 				console.error('why', error);
-	// 			}
-	// 		}
-	// 	})();
-	// }, [kakaoToken]);
+					localStorage.setItem('accessToken', accessToken);
+					localStorage.setItem('refreshToken', refreshToken);
+
+					navigate('/schedule');
+				} catch (error) {
+					console.error('why', error);
+				}
+			}
+		})();
+	}, [kakaoToken]);
 
 	return (
 		<div style={{ width: '100vw', height: '100vh' }}>
