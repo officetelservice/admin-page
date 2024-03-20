@@ -23,6 +23,7 @@ export const Container = styled.div`
 
 	opacity: 1;
 	transition: opacity 0.3s ease-in-out;
+	z-index: 999;
 `;
 
 export const Image = styled.img`

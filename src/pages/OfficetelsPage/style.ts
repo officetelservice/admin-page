@@ -6,8 +6,10 @@ export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 20px;
+
 	overflow-y: scroll;
+
+	padding: 0 20px;
 `;
 
 export const Title = styled.h2``;

@@ -7,7 +7,7 @@ export const Container = styled.div`
 	flex-direction: column;
 	align-items: center;
 	overflow-y: scroll;
-	padding: 20px;
+	padding: 0 20px;
 `;
 
 export const ScheduleContainer = styled.div`

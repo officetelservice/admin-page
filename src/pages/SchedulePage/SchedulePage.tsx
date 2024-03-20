@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import DatePickerComponent from '@/components/DatePicker/DatePicker';
 import ScheduleComponent from '@/components/Schedule/Schedule';
+import LoadingModalComponent from '@/components/Loading/Loading';
 import {
 	Container,
 	ScheduleContainer,
@@ -24,20 +25,24 @@ const SchedulePage = () => {
 			`/users/me/reserves?date=${formmatedDate}`
 		);
 
+		setLoading(true);
 		setSchedules(response.data.data);
+		setLoading(false);
 	}, [date]);
 
 	useEffect(() => {
-		setLoading(true);
 		getReserves();
-		setLoading(false);
 	}, [date]);
 
 	return (
 		<Container>
-			<DatePickerComponent date={date} setDate={setDate} />
+			{loading && <LoadingModalComponent />}
 
-			{schedules.length === 0 ? (
+			<div style={{ marginTop: '20px' }}>
+				<DatePickerComponent date={date} setDate={setDate} />
+			</div>
+
+			{!loading && schedules.length === 0 ? (
 				<AlertContainer>
 					<AlertText>일정이 없습니다</AlertText>
 				</AlertContainer>
