@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Container, Menu, MenuText, MiddleLine } from './style';
+import { useEffect } from 'react';
 
 const Header = () => {
 	const isLoggedIn = localStorage.getItem('accessToken');
@@ -13,6 +14,8 @@ const Header = () => {
 	const toOfficetelsPage = () => {
 		navigation('/officetels');
 	};
+
+	useEffect(() => {}, [isLoggedIn]);
 
 	return (
 		<Container style={{ display: isLoggedIn ?? 'none' }}>
