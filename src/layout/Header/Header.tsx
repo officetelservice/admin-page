@@ -15,10 +15,12 @@ const Header = () => {
 		navigation('/officetels');
 	};
 
-	useEffect(() => {}, [isLoggedIn]);
+	useEffect(() => {
+		console.log(isLoggedIn);
+	}, [isLoggedIn]);
 
 	return (
-		<Container style={{ display: isLoggedIn ?? 'none' }}>
+		<Container style={{ display: isLoggedIn ? 'flex' : 'none' }}>
 			<Menu onClick={toSchedulePage}>
 				<MenuText>일정</MenuText>
 			</Menu>
