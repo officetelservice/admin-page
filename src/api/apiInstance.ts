@@ -2,7 +2,10 @@ import { getAccessToken, getRefreshToken } from '@/utils/token';
 import axios, { AxiosInstance } from 'axios';
 
 const axiosInstance: AxiosInstance = axios.create({
-	baseURL: '/api',
+	baseURL:
+		process.env.NODE_ENV === 'development'
+			? '/api'
+			: process.env.VITE_SERVER_DOMAIN,
 	withCredentials: true,
 });
 
