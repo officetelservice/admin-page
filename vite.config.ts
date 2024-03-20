@@ -31,15 +31,15 @@ export default defineConfig({
 			},
 		],
 	},
-	server: {
-		proxy: {
-			'/api': {
-				target: 'https://api.officetel-backend.shop',
-				changeOrigin: true,
-				rewrite: (path) => path.replace(/^\/api/, ''),
-				secure: false,
-				ws: true,
-			},
-		},
-	},
+	// server: {
+	// 	proxy: {
+	// 		'/api': {
+	// 			target: 'https://api.officetel-backend.shop',
+	// 			changeOrigin: true,
+	// 			rewrite: (path) => path.replace(/^\/api/, ''),
+	// 			secure: false,
+	// 			ws: true,
+	// 		},
+	// 	},
+	// },
 });
