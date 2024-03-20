@@ -3,7 +3,6 @@ import axios, { AxiosInstance } from 'axios';
 
 const axiosInstance: AxiosInstance = axios.create({
 	baseURL: 'https://api.officetel-backend.shop',
-	withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use(
