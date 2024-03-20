@@ -36,7 +36,7 @@ export default ({ mode }: { mode: 'development' | 'production' }) => {
 		server: {
 			proxy: {
 				'/api': {
-					target: 'http://localhost:3000',
+					target: 'https://api.officetel-backend.shop/',
 					changeOrigin: true,
 					rewrite: (path) => path.replace(/^\/api/, ''),
 					secure: false,
