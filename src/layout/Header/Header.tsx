@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Menu, MenuText, MiddleLine } from './style';
 
 const Header = () => {
+	const isLoggedIn = localStorage.getItem('accessToken');
+
 	const navigation = useNavigate();
 
 	const toSchedulePage = () => {
@@ -13,7 +15,7 @@ const Header = () => {
 	};
 
 	return (
-		<Container>
+		<Container style={{ display: isLoggedIn ?? 'none' }}>
 			<Menu onClick={toSchedulePage}>
 				<MenuText>일정</MenuText>
 			</Menu>

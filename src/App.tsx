@@ -18,7 +18,7 @@ function App() {
 
 	return (
 		<BrowserRouter>
-			{isLoggedIn && <Header />}
+			<Header />
 			<Routes>
 				<Route element={<PublicRoute />}>
 					<Route path="/login" element={<LoginPage />}></Route>
