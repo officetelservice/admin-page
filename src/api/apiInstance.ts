@@ -29,6 +29,14 @@ axiosInstance.interceptors.response.use(
 
 		const error_code = error.response.data.code;
 
+		if (!message) {
+			return alert('잘못된 접근');
+		}
+
+		if (!error_code) {
+			return alert('잘못된 접근');
+		}
+
 		// const kakao_error_code = error.response.data.error_code;
 
 		// if (kakao_error_code.include('KOE')) {
