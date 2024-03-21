@@ -58,7 +58,7 @@ const KakaoLoginPage: React.FC = () => {
 
 					navigate('/schedule');
 				} catch (error) {
-					console.error('why', error);
+					console.error(error);
 				}
 			}
 		})();
