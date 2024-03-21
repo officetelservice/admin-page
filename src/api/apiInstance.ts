@@ -25,9 +25,11 @@ axiosInstance.interceptors.response.use(
 		return response.data;
 	},
 	async (error) => {
-		const message = error.response.data.message;
+		console.log(error);
 
-		const error_code = error.response.data.code;
+		const message = error.response?.data?.message;
+
+		const error_code = error.response?.data?.code;
 
 		if (!message) {
 			return alert('잘못된 접근');
