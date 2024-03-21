@@ -10,4 +10,8 @@ const getRefreshToken = (): string | null => {
 	return refreshToken;
 };
 
-export { getAccessToken, getRefreshToken };
+const deleteToken = (): void => {
+	localStorage.clear();
+};
+
+export { getAccessToken, getRefreshToken, deleteToken };
