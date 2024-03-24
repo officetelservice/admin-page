@@ -53,6 +53,8 @@ const SchedulePage = () => {
 
 		alert('일련번호가 입력되었습니다');
 
+		await getReserves();
+
 		closeInputModal();
 	};
 
