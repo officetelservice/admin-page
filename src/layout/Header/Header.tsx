@@ -15,9 +15,7 @@ const Header = () => {
 		navigation('/officetels');
 	};
 
-	useEffect(() => {
-		console.log(isLoggedIn);
-	}, [isLoggedIn]);
+	useEffect(() => {}, [isLoggedIn]);
 
 	return (
 		<Container style={{ display: isLoggedIn ? 'flex' : 'none' }}>

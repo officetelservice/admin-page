@@ -43,3 +43,9 @@ export const CompleteButton = styled.div`
 	border: 2px solid #ffa500;
 	border-radius: 12px;
 `;
+
+export const Completed = styled.div`
+	color: red;
+	padding: 5px 10px;
+	font-weight: bold;
+`;

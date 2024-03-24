@@ -7,13 +7,18 @@ import {
 	OfficetelFloor,
 	ReserveTime,
 	CompleteButton,
+	Completed,
 } from './style';
 
 interface ScheduleComponentProps {
 	schedule: Schedule;
+	clickEvent: () => void;
 }
 
-const ScheduleComponent: React.FC<ScheduleComponentProps> = ({ schedule }) => {
+const ScheduleComponent: React.FC<ScheduleComponentProps> = ({
+	schedule,
+	clickEvent,
+}) => {
 	return (
 		<ScheduleContainer>
 			<ReserveData>
@@ -25,7 +30,11 @@ const ScheduleComponent: React.FC<ScheduleComponentProps> = ({ schedule }) => {
 				</OfficetelData>
 			</ReserveData>
 
-			<CompleteButton>완료</CompleteButton>
+			{schedule.reserve.complete ? (
+				<Completed onClick={clickEvent}>완료</Completed>
+			) : (
+				<CompleteButton onClick={clickEvent}>완료하기</CompleteButton>
+			)}
 		</ScheduleContainer>
 	);
 };
