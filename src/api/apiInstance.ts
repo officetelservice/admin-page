@@ -2,8 +2,7 @@ import { getAccessToken, deleteToken } from '@/utils/token';
 import axios, { AxiosInstance } from 'axios';
 
 const axiosInstance: AxiosInstance = axios.create({
-	baseURL: '/api',
-	// baseURL: 'https://api.officetel-backend.shop/',
+	baseURL: 'https://api.officetel-backend.shop/',
 });
 
 axiosInstance.interceptors.request.use(
