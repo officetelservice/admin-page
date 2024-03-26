@@ -1,79 +1,102 @@
-import React from 'react';
-import {
-	Container,
-	Title,
-	OfficetelContainer,
-	RoomContainer,
-	OfficetelColContainer,
-	OfficetelRowContainer,
-} from './style';
+import React, { useEffect, useState } from 'react';
+import { Container, Title } from './style';
+import { useParams } from 'react-router-dom';
+import { GetAxiosInstance } from '@/api/axios.method';
+import { GetOfficetelDetailReponse } from '@/types/request.types';
+import { Officetel, Reserve } from '@/types/common.types';
 
-interface OfficetelData {
-	id: string;
-	name: string;
-	startDay: string;
-	endDay: string;
-	link: string;
-	start: number;
-	roomNum: number;
-	floorNum: number;
-}
+const OfficetelDetailPage = () => {
+	const params = useParams();
 
-interface OffictelRowProps {
-	officetel: OfficetelData;
-}
+	const [officetel, setOfficetel] = useState<Officetel>();
+	const [reserves, setReserves] = useState<Reserve[]>([]);
 
-interface OfficetelColProps {
-	officetel: OfficetelData;
-}
+	const { officetelId } = params;
 
-const OffictelRowComponent: React.FC<OffictelRowProps> = ({ officetel }) => {
-	const array = new Array(officetel.roomNum)
-		.fill(null)
-		.map((_, index) => index + 1);
+	const getOfficetelDetail = async () => {
+		const response = await GetAxiosInstance<GetOfficetelDetailReponse>(
+			`/officetels/${officetelId}/detail`
+		);
 
-	return (
-		<OfficetelRowContainer>
-			{array.map((_, index) => (
-				<RoomContainer key={index}>{officetel.start + 100}</RoomContainer>
-			))}
-		</OfficetelRowContainer>
-	);
-};
+		const { officetel, reserves } = response.data.data;
 
-const OfficetelColComponent: React.FC<OfficetelColProps> = ({ officetel }) => {
-	const array = new Array(officetel.floorNum)
-		.fill(null)
-		.map((_, index) => index + 1);
-
-	return (
-		<OfficetelColContainer>
-			{array.map((_, index) => (
-				<OffictelRowComponent key={index} officetel={officetel} />
-			))}
-		</OfficetelColContainer>
-	);
-};
-
-const OfficetelDetailPage: React.FC = () => {
-	const officetel: OfficetelData = {
-		id: 'asdfasddsdf',
-		name: 'A오피스텔',
-		startDay: '2024.03.01',
-		endDay: '2024.03.01',
-		link: 'www.naver.com',
-		start: 1000,
-		roomNum: 40,
-		floorNum: 20,
+		setOfficetel(officetel);
+		setReserves(reserves);
 	};
+
+	const Box = ({ row, col }) => {
+		const OfficetelArr = Array.from({ length: row * col }, (_, index) => {
+			let isReserved = false;
+			let isCompleted = false;
+
+			reserves.forEach((reserve) => {
+				if (reserve.floor === index + 100) {
+					isReserved = reserve.reservation;
+					isCompleted = reserve.complete;
+				}
+			});
+
+			return {
+				num: index + 100,
+				reserved: isReserved,
+				completed: isCompleted,
+			};
+		});
+
+		// 네모상자 스타일을 생성하는 함수
+		const generateBoxStyle = () => {
+			return {
+				display: 'grid',
+				gridTemplateRows: `repeat(${row}, 1fr)`, // 행의 개수를 설정합니다.
+				gridTemplateColumns: `repeat(${col}, 1fr)`, // 열의 개수를 설정합니다.
+				gap: '5px', // 셀 사이의 간격을 설정합니다.
+				backgroundColor: 'lightblue', // 배경색을 설정합니다.
+				width: '100%',
+				height: '100%',
+				padding: '10px', // 내부 여백을 설정합니다.
+				border: '1px solid black', // 테두리를 설정합니다.
+				overflow: 'auto',
+			};
+		};
+
+		return (
+			<div style={generateBoxStyle()}>
+				{OfficetelArr.map((officetel) => {
+					const backgroundColor = officetel.completed
+						? 'blue'
+						: officetel.reserved
+						? 'green'
+						: 'white';
+					return (
+						<div
+							style={{
+								display: 'flex',
+								justifyContent: 'center',
+								width: '40px',
+								height: '40px',
+								border: '1px solid black',
+								backgroundColor: backgroundColor,
+								fontSize: 'small',
+							}}
+							key={officetel.num}
+						>
+							{officetel.num}
+						</div>
+					);
+				})}
+			</div>
+		);
+	};
+
+	useEffect(() => {
+		getOfficetelDetail();
+	}, []);
 
 	return (
 		<Container>
 			<Title>오피스텔 A</Title>
 
-			<OfficetelContainer>
-				<OfficetelColComponent officetel={officetel} />
-			</OfficetelContainer>
+			<Box row={officetel?.floorNum} col={officetel?.roomNum} />
 		</Container>
 	);
 };

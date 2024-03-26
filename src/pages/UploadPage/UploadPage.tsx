@@ -61,13 +61,13 @@ const UploadPage = () => {
 
 	const createOfficetel = useCallback(async () => {
 		if (
-			!officetelName &&
-			!floorNum &&
-			!roomNum &&
-			!timeInterval &&
-			!startTime &&
-			!endTime &&
-			!startDate &&
+			!officetelName ||
+			!floorNum ||
+			!roomNum ||
+			!timeInterval ||
+			!startTime ||
+			!endTime ||
+			!startDate ||
 			!endDate
 		) {
 			return alert('항목을 모두 입력해주세요!');
